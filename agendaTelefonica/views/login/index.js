@@ -22,8 +22,8 @@ export default class LoginView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: '',
-      senha: '',
+      login: 'Vinicius',
+      senha: '123',
     };
   }
 
@@ -38,18 +38,14 @@ export default class LoginView extends Component {
   };
 
   _handlerEntrar = () => {
-    // if (JailMonkey.isJailBroken()) {
-    //   this.showMessage('Alerta!', 'Jailbreak ativo!');
-    // } else if (JailMonkey.hookDetected()) {
-    //   this.showMessage(
-    //     'Alerta!',
-    //     'Seu dispositivo possui alguns aplicativos maliciosos instalados!',
-    //   );
-    // } else {
-    // this.props.navigation.navigate('App');
-    this.props.navigation.navigate('Home');
+    if (this.state.login === 'Vinicius' && this.state.senha === '123'){
+      this.props.navigation.navigate('Home');
+    }
+    else {
+      Alert.alert('Preencha os dados corretamente');
+    }
 
-    // }
+
   };
 
   render() {
@@ -83,7 +79,7 @@ export default class LoginView extends Component {
                   borderBottomColor: LAYOUT.COLORS.secondary
                 }}
                 placeholder="Digite seu login"
-                // onChangeText={text => this.setState({text})}
+                onChangeText={login => this.setState({login})}
                 value={this.state.login}
               />
               <TextInput
@@ -93,8 +89,9 @@ export default class LoginView extends Component {
                   borderBottomWidth: 0.3,
                   borderBottomColor: LAYOUT.COLORS.secondary
                 }}
+                secureTextEntry={true}
                 placeholder="Digite sua senha"
-                // onChangeText={text => this.setState({text})}
+                onChangeText={senha => this.setState({senha})}
                 value={this.state.senha}
               />
             </View>

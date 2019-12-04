@@ -1,15 +1,13 @@
 import React from 'react';
 
-import {
-  createSwitchNavigator,
-  createAppContainer,
-} from 'react-navigation';
+import {createSwitchNavigator, createAppContainer} from 'react-navigation';
 
-import { createStackNavigator } from 'react-navigation-stack'
+import {createStackNavigator} from 'react-navigation-stack';
 
 import LoginView from '../views/login';
-import HomeView from '../views/home'
-
+import HomeView from '../views/home';
+import CadastroView from '../views/contato';
+import {LAYOUT} from '../constants/app.constant';
 
 const AuthStack = createStackNavigator(
   {
@@ -28,27 +26,35 @@ const AuthStack = createStackNavigator(
   },
 );
 
-const AppStack = createStackNavigator({
-  Home: {
-    screen: HomeView,
-    navigationOptions: () => ({
-      // header: null,
-      title: 'Home'
-    }),
+const AppStack = createStackNavigator(
+  {
+    Home: {
+      screen: HomeView,
+      navigationOptions: () => ({
+        // header: null,
+        title: 'Contatos', 
+        headerStyle: {
+          backgroundColor: LAYOUT.COLORS.secondary,
+        },
+      }),
+    },
+    Cadastro: {
+      screen: CadastroView,
+      navigationOptions: () => ({
+        // header: null,
+        title: 'Novo Contato',
+        headerStyle: {
+          backgroundColor: LAYOUT.COLORS.secondary,
+        },
+      }),
+    },
   },
-},
   {
     initialRouteName: 'Home',
     navigationOptions: () => ({
       header: null,
     }),
   },
-  // Detalhes: {
-  //   screen: Detalhes,
-  //   navigationOptions: () => ({
-  //     header: null,
-  //   }),
-  // },
 );
 
 const AppContainer = createAppContainer(
@@ -65,9 +71,7 @@ const AppContainer = createAppContainer(
 );
 
 const App = props => {
-  return (
-    <AppContainer/>
-  );
+  return <AppContainer />;
 };
 
 export default App;

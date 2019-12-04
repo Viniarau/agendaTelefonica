@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: px(20),
+    // paddingTop: px(20),
     paddingHorizontal: px(15),
   },
 
@@ -26,27 +26,45 @@ const styles = StyleSheet.create({
     fontSize: px(18),
     // fontFamily: LAYOUT.FONTS.frutigerBold,
   },
-  containerCard: {
+  containerCadastro: {
     flex: 1,
     width: '100%',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginBottom: px(5),
+    justifyContent: 'center',
+    paddingHorizontal: px(30),
+    paddingTop: px(30),
+  },
+  textInput: {
+    height: 40,
+    paddingLeft: 20,
+    borderWidth: 0.3,
+    borderColor: LAYOUT.COLORS.secondary,
+    width: '100%'
+  },
+  label: {
+    color:  LAYOUT.COLORS.secondary,
+    fontWeight: '600',
+    fontSize: px(15),
+    paddingVertical: px(10)
+  },
+  containerButton: {
+    flex: 1,
+    alignItems: 'center',
   },
   button: {
-    position: 'absolute',
-    zIndex: 999,
+    position: 'relative',
     backgroundColor: LAYOUT.COLORS.secondary,
-    padding: px(18),
+    padding: px(5),
     borderRadius: px(35),
-    bottom: px(20),
-    right: px(20)
+    alignItems: 'center',
+    marginTop: px(20),
+    width: '60%',
   },
   textButton: {
     color: '#fff',
     fontWeight: '800',
-    fontSize: px(22),
-  }
+    fontSize: px(20),
+  },
 });
 
 export {styles};
