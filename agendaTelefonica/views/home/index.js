@@ -19,6 +19,7 @@ export default class HomeView extends Component {
     super(props);
     this.state = {
       contatos: CONTATOSMOCK,
+      contatosAdd: [],
       showCadastro: false,
     };
   }
@@ -28,13 +29,13 @@ export default class HomeView extends Component {
   }
 
   onChangeFormField = (name, value) => {
-    let formEdit = {...this.state.contatos};
+    let formEdit = {...this.state.contatosAdd};
     formEdit[name] = value;
-    this.setState({contatos: formEdit});
+    this.setState({contatosAdd: formEdit});
   };
 
   cadastrar() {
-    CONTATOSMOCK.push(this.state.contatos);
+    this.state.contatos.push(this.state.contatosAdd);
     this.setState({showCadastro: false});
   }
 

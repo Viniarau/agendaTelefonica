@@ -38,9 +38,10 @@ const styles = StyleSheet.create({
     zIndex: 999,
     backgroundColor: LAYOUT.COLORS.secondary,
     padding: px(18),
+    paddingHorizontal: px(20),
     borderRadius: px(35),
-    bottom: px(20),
-    right: px(20)
+    bottom: px(18),
+    right: px(18)
   },
   textButton: {
     color: '#fff',
