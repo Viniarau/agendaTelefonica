@@ -6,7 +6,6 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import LoginView from '../views/login';
 import HomeView from '../views/home';
-import CadastroView from '../views/contato';
 import {LAYOUT} from '../constants/app.constant';
 
 const AuthStack = createStackNavigator(
@@ -33,16 +32,6 @@ const AppStack = createStackNavigator(
       navigationOptions: () => ({
         // header: null,
         title: 'Contatos', 
-        headerStyle: {
-          backgroundColor: LAYOUT.COLORS.secondary,
-        },
-      }),
-    },
-    Cadastro: {
-      screen: CadastroView,
-      navigationOptions: () => ({
-        // header: null,
-        title: 'Novo Contato',
         headerStyle: {
           backgroundColor: LAYOUT.COLORS.secondary,
         },
