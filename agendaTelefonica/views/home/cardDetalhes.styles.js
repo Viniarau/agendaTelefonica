@@ -12,41 +12,54 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
-    paddingTop: px(25),
+    paddingTop: px(35),
     paddingHorizontal: px(25),
+    height: '100%',
   },
-
-  containerCards: {
-    width: '100%',
-    // fontFamily: LAYOUT.FONTS.frutigerBold,
-  },
-  text: {
-    color: 'gray',
-    fontWeight: '600',
-    fontSize: px(18),
-    // fontFamily: LAYOUT.FONTS.frutigerBold,
-  },
-  containerCard: {
+  containerDetalhes: {
     flex: 1,
     width: '100%',
+    height: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
     marginBottom: px(5),
+    padding: px(20)
   },
-  button: {
-    position: 'absolute',
-    zIndex: 999,
-    backgroundColor: LAYOUT.COLORS.secondary,
+  detalhes: {
+    backgroundColor: LAYOUT.COLORS.primary,
+    width: '100%',
+    height: '100%',
     padding: px(18),
     paddingHorizontal: px(20),
-    borderRadius: px(35),
-    bottom: px(18),
-    right: px(18)
+    borderRadius: px(10),
+    justifyContent: 'space-between'
   },
-  textButton: {
-    color: '#fff',
-    fontWeight: '800',
-    fontSize: px(22),
+  foto: {
+    alignItems: 'center',
+    paddingTop: px(20),
+    paddingBottom: px(30)
+  },
+  textNome: {
+    fontSize: px(20),
+    fontWeight: '600'
+  },
+  text: {
+    fontSize: px(15),
+    fontWeight: '600',
+    paddingTop: px(20),
+  },
+  containerNome: {
+    alignItems: 'center',
+    paddingBottom: px(20)
+  },
+  containerInformacoes: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginHorizontal: px(20),
+    paddingBottom: px(20),
+    borderWidth: px(2),
+    borderRadius: px(10),
+    borderColor: LAYOUT.COLORS.secondary,
   }
 });
 

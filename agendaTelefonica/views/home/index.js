@@ -21,7 +21,7 @@ export default class HomeView extends Component {
       contatos: CONTATOSMOCK,
       contatosAdd: [],
       showCadastro: false,
-      item: []
+      item: [],
     };
   }
 
@@ -35,12 +35,19 @@ export default class HomeView extends Component {
     this.setState({ contatosAdd: formEdit });
   };
 
-  cadastrar = () => {
+    cadastrar = async () => {
+    await this.salvar();
     this.state.contatos.push(this.state.contatosAdd);
     this.setState({ showCadastro: false });
   }
 
+  salvar = () => {
+    // this.onChangeFormField({id: this.state.id});
+    // this.state.id += 1;
+  }
+
   toBack = () => {
+    console.warn('teste');
     this.setState({ showCadastro: false });
   }
 
@@ -70,7 +77,8 @@ export default class HomeView extends Component {
                         <View style={styles.containerCard}>
                           <CardContato key={i} item={item} handlePress={() =>
                             this.props.navigation.navigate('ContatosDetalhes', {
-                              contatos: this.state.contatosAdd,
+                              contatoSelecionado: item.id,
+                              contatos: this.state.contatos,
                             })} />
                         </View>
                       );

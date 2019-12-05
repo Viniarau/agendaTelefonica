@@ -6,7 +6,9 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import LoginView from '../views/login';
 import HomeView from '../views/home';
-import ContatosDetalhesView from '../views/home/cardDetalhes.js'
+import ContatosDetalhesView from '../views/home/cardDetalhes.js';
+import AuthLoadingScreen from '../views/authLoadingScreen';
+import HeaderLogout from '../component/header-logout.component';
 
 import {LAYOUT} from '../constants/app.constant';
 
@@ -42,7 +44,11 @@ const AppStack = createStackNavigator(
     ContatosDetalhes: {
       screen: ContatosDetalhesView,
       navigationOptions: () => ({
-        header: null,
+        // header: null,
+        title: 'Contato Detalhe', 
+        headerStyle: {
+          backgroundColor: LAYOUT.COLORS.secondary,
+        },
       }),
     },
   },
@@ -57,12 +63,12 @@ const AppStack = createStackNavigator(
 const AppContainer = createAppContainer(
   createSwitchNavigator(
     {
-      // AuthLoading: AuthLoadingScreen,
+      AuthLoading: AuthLoadingScreen,
       Auth: AuthStack,
       App: AppStack,
     },
     {
-      initialRouteName: 'Auth',
+      initialRouteName: 'AuthLoading',
     },
   ),
 );
