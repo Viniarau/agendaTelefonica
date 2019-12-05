@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   ScrollView,
   View,
@@ -6,13 +6,13 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import {LAYOUT} from '../../constants/app.constant';
+import { LAYOUT } from '../../constants/app.constant';
 
 import CardContato from '../../component/commom/CardContato';
 import CONTATOSMOCK from '../../assets/mock/contatos.mock';
 import CadastrarContato from '../../component/commom/CadastrarContato';
 
-import {styles} from './styles';
+import { styles } from './styles';
 
 export default class HomeView extends Component {
   constructor(props) {
@@ -21,22 +21,27 @@ export default class HomeView extends Component {
       contatos: CONTATOSMOCK,
       contatosAdd: [],
       showCadastro: false,
+      item: []
     };
   }
 
   novoContato() {
-    this.setState({showCadastro: true});
+    this.setState({ showCadastro: true });
   }
 
   onChangeFormField = (name, value) => {
-    let formEdit = {...this.state.contatosAdd};
+    let formEdit = { ...this.state.contatosAdd };
     formEdit[name] = value;
-    this.setState({contatosAdd: formEdit});
+    this.setState({ contatosAdd: formEdit });
   };
 
-  cadastrar() {
+  cadastrar = () => {
     this.state.contatos.push(this.state.contatosAdd);
-    this.setState({showCadastro: false});
+    this.setState({ showCadastro: false });
+  }
+
+  toBack = () => {
+    this.setState({ showCadastro: false });
   }
 
   render() {
@@ -47,35 +52,41 @@ export default class HomeView extends Component {
             item={this.state.contatos}
             onChangeFormField={this.onChangeFormField}
             salvar={this.cadastrar}
+            toBack={this.toBack}
           />
         ) : (
-          <ScrollView style={styles.scrollView}>
-            <StatusBar
-              barStyle="light-content"
-              backgroundColor={LAYOUT.COLORS.primary}
-              translucent={false}
-            />
-            <View style={styles.container}>
-              <View style={styles.containerCards}>
-                {this.state.contatos && this.state.contatos.length
-                  ? this.state.contatos.map((item, i = 0) => {
+            <ScrollView style={styles.scrollView}>
+              <StatusBar
+                barStyle="light-content"
+                backgroundColor={LAYOUT.COLORS.primary}
+                translucent={false}
+              />
+              <View style={styles.container}>
+                <View style={styles.containerCards}>
+                  {this.state.contatos && this.state.contatos.length
+                    ? this.state.contatos.map((item, i = 0) => {
                       i++;
                       return (
                         <View style={styles.containerCard}>
-                          <CardContato key={i} item={item} />
+                          <CardContato key={i} item={item} handlePress={() =>
+                            this.props.navigation.navigate('ContatosDetalhes', {
+                              contatos: this.state.contatosAdd,
+                            })} />
                         </View>
                       );
                     })
-                  : null}
+                    : null}
+                </View>
               </View>
-            </View>
-          </ScrollView>
-        )}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.novoContato()}>
-          <Text style={styles.textButton}> + </Text>
-        </TouchableOpacity>
+            </ScrollView>
+          )}
+        {!this.state.showCadastro ? (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.novoContato()}>
+            <Text style={styles.textButton}> + </Text>
+          </TouchableOpacity>
+        ) : null}
       </View>
     );
   }

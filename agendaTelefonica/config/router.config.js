@@ -6,6 +6,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import LoginView from '../views/login';
 import HomeView from '../views/home';
+import ContatosDetalhesView from '../views/home/cardDetalhes.js'
+
 import {LAYOUT} from '../constants/app.constant';
 
 const AuthStack = createStackNavigator(
@@ -35,6 +37,12 @@ const AppStack = createStackNavigator(
         headerStyle: {
           backgroundColor: LAYOUT.COLORS.secondary,
         },
+      }),
+    },
+    ContatosDetalhes: {
+      screen: ContatosDetalhesView,
+      navigationOptions: () => ({
+        header: null,
       }),
     },
   },

@@ -13,7 +13,7 @@ import {px} from '../../utils/functions.util';
 
 const CardContato = props => {
   //   const [foo, setFoo] = useState(false);
-  const {item} = props;
+  const {item, handlePress} = props;
 
   useEffect(() => {
     // Ao montar o componente
@@ -24,13 +24,13 @@ const CardContato = props => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.item}>
+      <TouchableOpacity activeOpacity={0.7} style={styles.item} onPress={handlePress}>
         <Text>foto</Text>
         <View style={styles.informaçoes}>
           <Text style={styles.nome}>{item.nome}</Text>
           <Text style={styles.telefone}>{item.telefone}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: '100%',
     paddingVertical: px(15),
-    paddingHorizontal: px(25),
+    paddingHorizontal: px(40),
     borderWidth: 0,
     flexDirection: 'row',
     alignItems: 'center',

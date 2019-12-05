@@ -12,9 +12,10 @@ import {
 
 import {LAYOUT} from '../../constants/app.constant';
 import {px} from '../../utils/functions.util';
+import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 const CadastrarContato = props => {
-  const {item, onChangeFormField, salvar} = props;
+  const {item, onChangeFormField, salvar, toBack} = props;
 
   useEffect(() => {
     // Ao montar o componente
@@ -25,6 +26,9 @@ const CadastrarContato = props => {
 
   return (
     <ScrollView style={styles.scrollView}>
+      <TouchableOpacity style={styles.exit} onPress={() => toBack()}>
+        <Text style={styles.textExit}>x</Text>
+      </TouchableOpacity>
       <View style={styles.containerCadastro}>
         <Text style={styles.label}>Nome:</Text>
         <TextInput
@@ -116,6 +120,20 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: px(20),
   },
+  exit:{
+    position: 'absolute',
+    right: px(5),
+    top: px(5),
+    paddingHorizontal:px(10),
+    paddingVertical:px(2),
+    backgroundColor: 'gray',
+    borderRadius: px(20)
+  },
+  textExit: {
+    color: '#fff',
+    fontSize: px(18),
+    fontWeight: '800'
+  }
 });
 
 export default CadastrarContato;
