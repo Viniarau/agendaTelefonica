@@ -7,15 +7,21 @@ import {
   Image,
   Text,
   ScrollView,
-  TextInput
+  TextInput,
 } from 'react-native';
 
 import {LAYOUT} from '../../constants/app.constant';
 import {px} from '../../utils/functions.util';
-import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 const CadastrarContato = props => {
-  const {item, onChangeFormField, salvar, toBack} = props;
+  const {
+    item,
+    onChangeFormField,
+    salvar,
+    editarContato,
+    toBack,
+    editar,
+  } = props;
 
   useEffect(() => {
     // Ao montar o componente
@@ -41,18 +47,36 @@ const CadastrarContato = props => {
         <TextInput
           style={styles.textInput}
           placeholder="(ddd) XXXX-XXXX"
-          onChangeText={telefone =>
-            onChangeFormField('telefone', telefone)
-          }
+          onChangeText={telefone => onChangeFormField('telefone', telefone)}
           value={item.telefone}
+        />
+        <Text style={styles.label}>Cargo:</Text>
+        <TextInput
+          style={styles.textInput}
+          placeholder="cargo"
+          onChangeText={cargo => onChangeFormField('cargo', cargo)}
+          value={item.cargo}
+        />
+        <Text style={styles.label}>Grau Parentesco:</Text>
+        <TextInput
+          style={styles.textInput}
+          placeholder="grau de parentesco"
+          onChangeText={grau => onChangeFormField('grau', grau)}
+          value={item.grau}
         />
       </View>
       <View style={styles.containerButton}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => salvar()}>
-          <Text style={styles.textButton}>Cadastrar</Text>
-        </TouchableOpacity>
+        {editar ? (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => editarContato()}>
+            <Text style={styles.textButton}>Editar</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={() => salvar()}>
+            <Text style={styles.textButton}>Cadastrar</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </ScrollView>
   );
@@ -67,19 +91,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingTop: px(20),
     paddingHorizontal: px(15),
   },
 
   containerCards: {
     width: '100%',
-    // fontFamily: LAYOUT.FONTS.frutigerBold,
   },
   text: {
     color: 'gray',
     fontWeight: '600',
     fontSize: px(18),
-    // fontFamily: LAYOUT.FONTS.frutigerBold,
   },
   containerCadastro: {
     flex: 1,
@@ -120,20 +141,21 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: px(20),
   },
-  exit:{
+  exit: {
     position: 'absolute',
+    zIndex: 1,
     right: px(5),
     top: px(5),
-    paddingHorizontal:px(10),
-    paddingVertical:px(2),
+    paddingHorizontal: px(10),
+    paddingVertical: px(2),
     backgroundColor: 'gray',
-    borderRadius: px(20)
+    borderRadius: px(20),
   },
   textExit: {
     color: '#fff',
     fontSize: px(18),
-    fontWeight: '800'
-  }
+    fontWeight: '800',
+  },
 });
 
 export default CadastrarContato;

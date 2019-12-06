@@ -8,25 +8,38 @@ import {
 } from 'react-native';
 import {LAYOUT} from '../../constants/app.constant';
 
+import CadastrarContato from '../../component/commom/CadastrarContato';
+
 import {styles} from './cardDetalhes.styles';
 
 const ContatosDetalhes = props => {
-  const {item} = props;
+  const {item, showView} = props;
   return (
     <View style={styles.containerDetalhes}>
-      <View style={styles.detalhes}>
-        <View style={styles.foto}>
-          <Text>FOTO</Text>
+      {showView ? (
+        <CadastrarContato
+          item={item}
+          onChangeFormField={this.onChangeFormField}
+          salvar={this.cadastrarContato}
+          toBack={this.toBack}
+          editar={true}
+
+        />
+      ) : (
+        <View style={styles.detalhes}>
+          <View style={styles.foto}>
+            <Text>FOTO</Text>
+          </View>
+          <View style={styles.containerNome}>
+            <Text style={styles.textNome}>{item.nome}</Text>
+          </View>
+          <View style={styles.containerInformacoes}>
+            <Text style={styles.text}>{item.telefone}</Text>
+            <Text style={styles.text}>{item.cargo}</Text>
+            <Text style={styles.text}>{item.grau}</Text>
+          </View>
         </View>
-        <View style={styles.containerNome}>
-          <Text style={styles.textNome}>{item.nome}</Text>
-        </View>
-        <View style={styles.containerInformacoes}>
-          <Text style={styles.text}>{item.telefone}</Text>
-          <Text style={styles.text}>{item.cargo}</Text>
-          <Text style={styles.text}>{item.grau}</Text>
-        </View>
-      </View>
+      )}
     </View>
   );
 };
@@ -41,8 +54,11 @@ export default class ContatosDetalhesView extends Component {
     this.state = {
       dados: contatos,
       ativo: contatoSelecionado,
+      showView: false,
     };
   }
+
+  openEdition = () => [this.setState({showView: true})];
 
   render() {
     return (
@@ -50,8 +66,14 @@ export default class ContatosDetalhesView extends Component {
         <View style={styles.container}>
           <ContatosDetalhes
             item={this.state.dados.filter(i => i.id === this.state.ativo)[0]}
+            showView={this.state.showView}
           />
         </View>
+        {!this.state.showView ? (
+        <TouchableOpacity onPress={() => this.openEdition()}>
+          <Text>Editar</Text>
+        </TouchableOpacity>
+        ) : null }
       </ScrollView>
     );
   }

@@ -11,6 +11,7 @@ import { LAYOUT } from '../../constants/app.constant';
 import CardContato from '../../component/commom/CardContato';
 import CONTATOSMOCK from '../../assets/mock/contatos.mock';
 import CadastrarContato from '../../component/commom/CadastrarContato';
+import axios from 'axios';
 
 import { styles } from './styles';
 
@@ -18,36 +19,47 @@ export default class HomeView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contatos: CONTATOSMOCK,
-      contatosAdd: [],
+      contatos: [],
+      form: [
+        {
+          nome: '',
+          telefone: '',
+        }
+      ],
       showCadastro: false,
       item: [],
     };
   }
 
-  novoContato() {
+  componentDidMount(){
+    this.getContatos();
+  }
+
+  getContatos = async () => {
+    const res = await axios.get(`http://localhost:3000/contatos`);
+    this.setState({ contatos: res.data });
+  }
+
+  novoContato(){
     this.setState({ showCadastro: true });
   }
 
   onChangeFormField = (name, value) => {
-    let formEdit = { ...this.state.contatosAdd };
+    let formEdit = { ...this.state.form };
     formEdit[name] = value;
-    this.setState({ contatosAdd: formEdit });
+    this.setState({ form: formEdit });
   };
 
-    cadastrar = async () => {
-    await this.salvar();
-    this.state.contatos.push(this.state.contatosAdd);
+  cadastrarContato = async () => {
+    let form = this.state.form;
+    const res = await axios.post(`http://localhost:3000/contatos`, form );
+    this.setState({ contatos: res.data });
     this.setState({ showCadastro: false });
-  }
 
-  salvar = () => {
-    // this.onChangeFormField({id: this.state.id});
-    // this.state.id += 1;
+    this.getContatos();
   }
 
   toBack = () => {
-    console.warn('teste');
     this.setState({ showCadastro: false });
   }
 
@@ -58,8 +70,9 @@ export default class HomeView extends Component {
           <CadastrarContato
             item={this.state.contatos}
             onChangeFormField={this.onChangeFormField}
-            salvar={this.cadastrar}
+            salvar={this.cadastrarContato}
             toBack={this.toBack}
+            editar={false}
           />
         ) : (
             <ScrollView style={styles.scrollView}>
