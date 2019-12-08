@@ -19,7 +19,7 @@ const HeaderLogout = props => {
           color: 'white',
           fontSize: 15,
           fontWeight: '700',
-          fontFamily: LAYOUT.FONTS.frutigerBold,
+          // fontFamily: LAYOUT.FONTS.frutigerBold,
         }}>
         {name}
       </Text>
@@ -42,7 +42,8 @@ const HeaderLogout = props => {
         }}
         // onPress={() => this.props.navigation.navigate('AuthStack')}
       >
-        <FontAwesomeIcon icon={faExitSolid} size={22} style={{color: '#fff'}} />
+        <Text>Exit</Text>
+        {/* <FontAwesomeIcon icon={faExitSolid} size={22} style={{color: '#fff'}} /> */}
       </TouchableOpacity>
     </View>
   );

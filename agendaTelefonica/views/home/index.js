@@ -5,12 +5,14 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  Button
 } from 'react-native';
 import { LAYOUT } from '../../constants/app.constant';
 
 import CardContato from '../../component/commom/CardContato';
 import CONTATOSMOCK from '../../assets/mock/contatos.mock';
 import CadastrarContato from '../../component/commom/CadastrarContato';
+import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 
 import { styles } from './styles';
@@ -31,7 +33,7 @@ export default class HomeView extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getContatos();
   }
 
@@ -40,7 +42,7 @@ export default class HomeView extends Component {
     this.setState({ contatos: res.data });
   }
 
-  novoContato(){
+  novoContato() {
     this.setState({ showCadastro: true });
   }
 
@@ -52,7 +54,15 @@ export default class HomeView extends Component {
 
   cadastrarContato = async () => {
     let form = this.state.form;
-    const res = await axios.post(`http://localhost:3000/contatos`, form );
+    const res = await axios.post(`http://localhost:3000/contatos`, form);
+    this.setState({ contatos: res.data });
+    this.setState({ showCadastro: false });
+
+    this.getContatos();
+  }
+
+  editarContato = async (form, id) => {
+    const res = await axios.put(`http://localhost:3000/contatos/${id}`, form);
     this.setState({ contatos: res.data });
     this.setState({ showCadastro: false });
 
@@ -61,6 +71,12 @@ export default class HomeView extends Component {
 
   toBack = () => {
     this.setState({ showCadastro: false });
+  }
+
+  exit = async () => {
+    await AsyncStorage.setItem('autenticado', 'false');
+    await this.props.navigation.navigate('Login');
+    console.warn('teste');
   }
 
   render() {
@@ -81,6 +97,9 @@ export default class HomeView extends Component {
                 backgroundColor={LAYOUT.COLORS.primary}
                 translucent={false}
               />
+              <TouchableOpacity style={styles.logout} onPress={() => this.exit()}>
+                <Text>Logout</Text>
+              </TouchableOpacity>
               <View style={styles.container}>
                 <View style={styles.containerCards}>
                   {this.state.contatos && this.state.contatos.length
@@ -92,6 +111,7 @@ export default class HomeView extends Component {
                             this.props.navigation.navigate('ContatosDetalhes', {
                               contatoSelecionado: item.id,
                               contatos: this.state.contatos,
+                              editarContado: this.editarContato,
                             })} />
                         </View>
                       );

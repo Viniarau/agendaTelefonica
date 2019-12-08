@@ -8,7 +8,7 @@ import LoginView from '../views/login';
 import HomeView from '../views/home';
 import ContatosDetalhesView from '../views/home/cardDetalhes.js';
 import AuthLoadingScreen from '../views/authLoadingScreen';
-import HeaderLogout from '../component/header-logout.component';
+// import HeaderLogout from '../component/header-logout.component';
 
 import {LAYOUT} from '../constants/app.constant';
 
@@ -33,7 +33,7 @@ const AppStack = createStackNavigator(
   {
     Home: {
       screen: HomeView,
-      navigationOptions: () => ({
+      navigationOptions: ({navigation}) => ({
         // header: null,
         title: 'Contatos', 
         headerStyle: {

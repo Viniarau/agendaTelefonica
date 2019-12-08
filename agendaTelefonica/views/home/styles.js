@@ -47,6 +47,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '800',
     fontSize: px(22),
+  },
+  logout: {
+    position: 'absolute',
+    right: px(10)
   }
 });
 

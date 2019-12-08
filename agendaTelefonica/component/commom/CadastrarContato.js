@@ -69,7 +69,8 @@ const CadastrarContato = props => {
         {editar ? (
           <TouchableOpacity
             style={styles.button}
-            onPress={() => editarContato()}>
+            // onPress={() => editarContato()}
+            >
             <Text style={styles.textButton}>Editar</Text>
           </TouchableOpacity>
         ) : (
