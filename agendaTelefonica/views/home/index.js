@@ -35,6 +35,7 @@ export default class HomeView extends Component {
 
   componentDidMount() {
     this.getContatos();
+    console.disableYellowBox = true;
   }
 
   getContatos = async () => {

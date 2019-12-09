@@ -31,6 +31,7 @@ export default class LoginView extends Component {
 
   componentDidMount() {
     this.setAsyncStorage();
+    console.disableYellowBox = true;
   }
 
   setAsyncStorage = async () => {
