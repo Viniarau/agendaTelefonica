@@ -77,7 +77,6 @@ export default class HomeView extends Component {
   exit = async () => {
     await AsyncStorage.setItem('autenticado', 'false');
     await this.props.navigation.navigate('Login');
-    console.warn('teste');
   }
 
   render() {

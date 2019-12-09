@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
   },
   logout: {
     position: 'absolute',
-    right: px(10)
+    right: px(10),
+    zIndex:1
   }
 });
 
